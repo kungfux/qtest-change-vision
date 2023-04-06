@@ -10,7 +10,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.qtestnet.com/*"],
-      "js": ["content.js"]
+      "js": ["dist/main.js"]
     }
   ],
   "host_permissions": ["*://*.qtestnet.com/*"]
