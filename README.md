@@ -1,8 +1,12 @@
 # Introduction
 
-`qTest Change Vision` is a browser extension to highlight changes in qTest Manager's History dialog to make it easier to see what was changed.
+`qTest Manager Assistant` is a browser extension that adds extra functionality to make everyday work with qTest Manager easier.
 
-![Demo](docs/demo.png)
+## Features
+
+- Test Design
+  - Highlights changes in `History` dialog
+    ![Demo](docs/demo.png)
 
 ## Development
 

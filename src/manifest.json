@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "qTest Change Vision",
+  "name": "qTest Manager Assistant",
   "version": "1.0",
-  "description": "Highlights changes in qTest History dialog to make it easier to see what content has changed for test case.",
+  "description": "Adds extra functionality to make everyday work with qTest Manager easier.",
   "icons": {
-    "48": "icons/eye48.png",
-    "128": "icons/eye128.png"
+    "48": "icons/puzzle48.png",
+    "128": "icons/puzzle128.png"
   },
   "content_scripts": [
     {
