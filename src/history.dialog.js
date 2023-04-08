@@ -1,21 +1,17 @@
 import { getElementByXpath, getElementsByXpath } from './locator.js';
 
-const highlightStyles = {
-  row: '2px solid red',
-  title: 'color:red',
-};
 const selectors = {
   historyDialog:
     '//span[contains(@class,"modal-title") and contains(text(),"History")]',
   historyDialogTableCells:
-    '//table//td[contains(@class,"history-value") and .//p]',
+    '//table//tr//td[contains(@class,"history-value") and position()>last()-2]',
 };
 
 function getHistoryDialog() {
   return getElementByXpath(selectors.historyDialog);
 }
 
-function setHistoryDialogInnerHtml(dialog, title) {
+function setHistoryDialogTitleInnerHtml(dialog, title) {
   dialog.innerHTML = title;
 }
 
@@ -42,7 +38,7 @@ function getChangedRows(historyDialog) {
 }
 
 function highlightRow(row) {
-  row.style.border = highlightStyles.row;
+  row.style.border = '2px solid red';
 }
 
 function highlightChanges() {
@@ -54,14 +50,14 @@ function highlightChanges() {
 
     const changedRows = getChangedRows(historyDialog);
     if (changedRows.length === 0) {
-      setHistoryDialogInnerHtml(historyDialog, 'History - no changes');
+      setHistoryDialogTitleInnerHtml(historyDialog, 'History - no changes');
       return;
     }
 
     changedRows.forEach((row) => highlightRow(row));
-    setHistoryDialogInnerHtml(
+    setHistoryDialogTitleInnerHtml(
       historyDialog,
-      `History - <span style="${highlightStyles.title}"> Changes highlighted</span>`
+      `History - <span style="color:red"> Changes highlighted</span>`
     );
   } catch (e) {
     // DOM changed, ignore and stop
