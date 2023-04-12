@@ -9,7 +9,7 @@ const trigger = {
 const selectors = {
   historyTab: '//tab-view[@id="testCaseTabView"]//tab-nav//ul//span[contains(text(),"History")]//parent::a',
   lastHistoryExpandedRow: '(//tab-view[@id="testCaseTabView"]//table[@class="change-list"]//tr[not(contains(@class,"history"))])[last()]',
-  lastHistoryRowExpand: '(//tab-view[@id="testCaseTabView"]//table[@class="change-list"]//tr[not(contains(@class,"history"))])[last()-1]//span',
+  lastHistoryRowExpand: '(//tab-view[@id="testCaseTabView"]//table[@class="change-list"]//tr[contains(@class,"revision") and not(contains(@class,"history"))])[last()]//span',
 };
 
 let lastBaseURI = null;
@@ -25,8 +25,12 @@ async function addOnClickEventListener() {
   }
 
   historyTab.addEventListener("click", async () => {
-    const lastHistoryRowExpand = await waitForElementVisible(selectors.lastHistoryRowExpand);
-    lastHistoryRowExpand?.click();
+    await waitForElementVisible(selectors.lastHistoryRowExpand).then(e => {
+      e.click();
+    }).catch(error => {
+      console.error(error);
+      return;
+    });
 
     setTimeout(async () => {
       const lastHistoryExpandedRow = await waitForElementVisible(selectors.lastHistoryExpandedRow);
