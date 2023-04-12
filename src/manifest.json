@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "qTest Manager Assistant",
   "version": "1.0",
-  "description": "Adds extra functionality to make everyday work with qTest Manager easier.",
+  "description": "Add extra functionality to qTest Manager to make the work easier.",
   "icons": {
     "48": "icons/puzzle48.png",
     "128": "icons/puzzle128.png"
