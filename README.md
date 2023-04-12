@@ -4,6 +4,8 @@
 
 # Features
 
+- Global
+  - Close dialogs by pressing `Escape` key on keyboard
 - Test Design tab
   - Highlight changes in `History` dialog
   - Scroll to latest change in `History` tab automatically
