@@ -47,12 +47,7 @@ function getChangedRows(historyDialog) {
   return changedRows;
 }
 
-async function highlightChangedRows() {
-  const historyDialog = await getHistoryDialog();
-  if (!historyDialog) {
-    return;
-  }
-
+async function highlightChangedRows(historyDialog) {
   setTimeout(() => {
     const changedRows = getChangedRows(historyDialog);
     if (!changedRows.length) {
@@ -65,4 +60,13 @@ async function highlightChangedRows() {
   }, 250);
 }
 
-export { trigger, highlightChangedRows as exec };
+async function exec() {
+  const historyDialog = await getHistoryDialog();
+  if (!historyDialog) {
+    return;
+  }
+
+  highlightChangedRows(historyDialog);
+}
+
+export { trigger, exec };

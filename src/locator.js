@@ -69,6 +69,4 @@ function waitForElementVisible(xpath, context = document, timeout = 30000) {
   });
 }
 
-
-
 export { getElementByXpath, getElementsByXpath, waitForElement, waitForElementVisible };

@@ -1,3 +1,4 @@
+import { exec as dialogExec } from '../qtest/dialog.js';
 import { trigger as historyDialogTrigger, exec as historyDialogExec } from '../qtest/tab/test-design/history.dialog.js';
 import { trigger as testCasePageTrigger, exec as testCasePageExec } from '../qtest/tab/test-design/test-case.view.js';
 
@@ -36,6 +37,8 @@ function main() {
 
   subscribers.push({ trigger: historyDialogTrigger, exec: historyDialogExec });
   subscribers.push({ trigger: testCasePageTrigger, exec: testCasePageExec });
+
+  dialogExec();
 
   const config = { childList: true, subtree: true };
   const observer = new MutationObserver(onDomChangeCallback);
