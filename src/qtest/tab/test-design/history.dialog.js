@@ -1,6 +1,10 @@
-import { getElementByXpath, getElementsByXpath } from './locator.js';
+import { getElementsByXpath, waitForElementVisible } from '../../../locator.js';
 
-const dialogDomElementName = 'TESTSTEP-HISTORY-MODAL';
+const trigger = {
+  mutationType: 'childList',
+  tagName: 'teststep-history-modal'
+};
+
 const selectors = {
   dialog:
     '//span[contains(@class,"modal-title") and contains(text(),"History")]',
@@ -8,8 +12,8 @@ const selectors = {
     '//table//tr//td[contains(@class,"history-value") and position()>last()-2]',
 };
 
-function getHistoryDialog() {
-  return getElementByXpath(selectors.dialog);
+async function getHistoryDialog() {
+  return await waitForElementVisible(selectors.dialog);
 }
 
 function highlightRow(row) {
@@ -23,7 +27,7 @@ function updateDialogTitle(dialog, changesCount) {
 }
 
 function getChangedRows(historyDialog) {
-  const cellsIterator = getElementsByXpath(
+  const cells = getElementsByXpath(
     selectors.tableCells,
     historyDialog
   );
@@ -32,10 +36,9 @@ function getChangedRows(historyDialog) {
   let leftCellNode = null;
   let rightCellNode = null;
 
-  while (
-    (leftCellNode = cellsIterator.iterateNext()) &&
-    (rightCellNode = cellsIterator.iterateNext())
-  ) {
+  for (let i = 0; i < cells.length; i += 2) {
+    leftCellNode = cells[i];
+    rightCellNode = cells[i + 1];
     if (leftCellNode.textContent !== rightCellNode.textContent) {
       changedRows.push(leftCellNode.parentNode.parentNode);
     }
@@ -44,20 +47,22 @@ function getChangedRows(historyDialog) {
   return changedRows;
 }
 
-function highlightChanges() {
-  const historyDialog = getHistoryDialog();
+async function highlightChangedRows() {
+  const historyDialog = await getHistoryDialog();
   if (!historyDialog) {
     return;
   }
 
-  const changedRows = getChangedRows(historyDialog);
-  if (!changedRows.length) {
-    updateDialogTitle(historyDialog, changedRows.length);
-    return;
-  }
+  setTimeout(() => {
+    const changedRows = getChangedRows(historyDialog);
+    if (!changedRows.length) {
+      updateDialogTitle(historyDialog, changedRows.length);
+      return;
+    }
 
-  changedRows.forEach((row) => highlightRow(row));
-  updateDialogTitle(historyDialog, changedRows.length);
+    changedRows.forEach((row) => highlightRow(row));
+    updateDialogTitle(historyDialog, changedRows.length);
+  }, 250);
 }
 
-export { dialogDomElementName, highlightChanges };
+export { trigger, highlightChangedRows as exec };
