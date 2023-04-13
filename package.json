@@ -1,7 +1,7 @@
 {
   "name": "qtest-manager-assistant",
   "version": "1.0.0",
-  "description": "",
+  "description": "Add extra functionality to qTest Manager to make the work easier",
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.prod.js",
