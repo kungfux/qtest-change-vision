@@ -9,9 +9,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.qtestnet.com/*"],
-      "js": ["bundle.js"]
+      "matches": [
+        "*://*.qtestnet.com/*"
+      ],
+      "js": [
+        "bundle.js"
+      ]
     }
   ],
-  "host_permissions": ["*://*.qtestnet.com/*"]
+  "host_permissions": [
+    "*://*.qtestnet.com/*"
+  ]
 }
