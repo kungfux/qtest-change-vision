@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "qTest Manager Assistant",
-  "version": "1.0",
+  "version": "0.1",
   "description": "Add extra functionality to qTest Manager to make the work easier.",
   "icons": {
     "48": "icons/puzzle48.png",
