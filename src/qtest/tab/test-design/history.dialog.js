@@ -6,24 +6,27 @@ const trigger = {
 };
 
 const selectors = {
-  dialog:
+  dialogTitle:
     '//span[contains(@class,"modal-title") and contains(text(),"History")]',
   tableCells:
     '//table//tr//td[contains(@class,"history-value") and position()>last()-2]',
 };
 
-async function getHistoryDialog() {
-  return await waitForElementVisible(selectors.dialog);
+async function getHistoryDialogTitle() {
+  return await waitForElementVisible(selectors.dialogTitle);
 }
 
 function highlightRow(row) {
   row.style.border = '2px solid red';
 }
 
-function updateDialogTitle(dialog, changesCount) {
-  dialog.innerHTML = changesCount
-    ? `History - <span style="color:red;"> ${changesCount} changes</span>`
-    : 'History - <span style="color:green;"> no changes</span>';
+function updateDialogTitle(historyDialogTitle, changesCount) {
+  const extraTitle = document.createElement('span');
+  extraTitle.style.color = changesCount ? 'red' : 'green';
+  extraTitle.style.textTransform = 'none';
+  extraTitle.textContent = changesCount ? `${changesCount} change(s)` : 'no changes';
+  historyDialogTitle.textContent += ' - ';
+  historyDialogTitle.appendChild(extraTitle);
 }
 
 function getChangedRows(historyDialog) {
@@ -47,26 +50,26 @@ function getChangedRows(historyDialog) {
   return changedRows;
 }
 
-async function highlightChangedRows(historyDialog) {
+async function highlightChangedRows(historyDialogTitle) {
   setTimeout(() => {
-    const changedRows = getChangedRows(historyDialog);
+    const changedRows = getChangedRows(historyDialogTitle);
     if (!changedRows.length) {
-      updateDialogTitle(historyDialog, changedRows.length);
+      updateDialogTitle(historyDialogTitle, changedRows.length);
       return;
     }
 
     changedRows.forEach((row) => highlightRow(row));
-    updateDialogTitle(historyDialog, changedRows.length);
+    updateDialogTitle(historyDialogTitle, changedRows.length);
   }, 250);
 }
 
 async function exec() {
-  const historyDialog = await getHistoryDialog();
-  if (!historyDialog) {
+  const historyDialogTitle = await getHistoryDialogTitle();
+  if (!historyDialogTitle) {
     return;
   }
 
-  highlightChangedRows(historyDialog);
+  highlightChangedRows(historyDialogTitle);
 }
 
 export { trigger, exec };
