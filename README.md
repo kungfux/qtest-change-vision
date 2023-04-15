@@ -14,7 +14,9 @@
 
 # Install
 
-TBD
+Add an extension to your favorite browser by visiting extensions store
+
+- [https://addons.mozilla.org/](https://addons.mozilla.org/en-US/firefox/addon/assistant-for-qtest-manager/)
 
 # Build and test locally
 
