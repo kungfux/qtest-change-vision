@@ -1,7 +1,7 @@
 {
   "name": "qtest-manager-assistant",
   "version": "0.1.0",
-  "description": "Add extra functionality to qTest Manager to make the work easier",
+  "description": "Add extra functionality to qTest Manager",
   "private": true,
   "scripts": {
     "build:chrome": "npm run build -- --env BROWSER=chrome",
