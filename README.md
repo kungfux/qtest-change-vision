@@ -1,6 +1,6 @@
 # Introduction
 
-`qTest Manager Assistant` is a browser extension that adds extra functionality to qTest Manager.
+`Assistant for qTest Manager` is a browser extension that adds extra functionality to qTest Manager.
 
 # Features
 
