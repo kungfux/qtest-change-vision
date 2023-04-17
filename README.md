@@ -14,9 +14,20 @@
 
 # Install
 
-Add an extension to your favorite browser by visiting extensions store
+Add an extension to your favorite browser by visiting store
 
-- [https://addons.mozilla.org/](https://addons.mozilla.org/en-US/firefox/addon/assistant-for-qtest-manager/)
+[![](docs/get_addon_firefox.png)](https://addons.mozilla.org/en-US/firefox/addon/assistant-for-qtest-manager/) [![](docs/get_addon_chrome.png)](https://chrome.google.com/webstore/detail/pnbnfgjbennnjlajgpoajfilinkdpiaf)
+
+## Note for Firefox users
+
+Make sure to allow the extension to access website:
+
+- Navigate to qTest Manager
+- Click the extensions icon
+- Click gear icon
+- Click `Always Allow on *.qtestnet.com`
+
+![asd](docs/firefox_permissions.png)
 
 # Build and test locally
 
