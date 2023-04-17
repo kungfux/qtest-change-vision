@@ -17,6 +17,7 @@ module.exports = (env) => {
         ],
       }),
       new MergeJsonWebpackPlugin({
+        space: 2,
         files: ["./src/manifest.json", `./src/manifest.${env.BROWSER ?? 'chrome'}.json`],
         output: {
           fileName: "manifest.json",
