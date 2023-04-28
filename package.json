@@ -1,0 +1,25 @@
+{
+  "name": "qtest-manager-assistant",
+  "version": "0.1.0",
+  "description": "Add extra functionality to qTest Manager",
+  "private": true,
+  "scripts": {
+    "build:chrome": "npm run build -- --env BROWSER=chrome",
+    "build:firefox": "npm run build -- --env BROWSER=firefox",
+    "build": "webpack --config webpack.prod.js",
+    "watch:chrome": "npm run watch -- --env BROWSER=chrome",
+    "watch:firefox": "npm run watch -- --env BROWSER=firefox",
+    "watch": "webpack --watch --config webpack.dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexander Fuks",
+  "license": "MIT",
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "merge-jsons-webpack-plugin": "^2.0.1",
+    "webpack": "^5.79.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-merge": "^5.8.0",
+    "zip-webpack-plugin": "^4.0.1"
+  }
+}
