@@ -6,6 +6,8 @@
 
 > Check out [demo](#demo) section to see it in action.
 
+- Copy & share
+  - Copy test case number, name, and link to share with a single click
 - Test case review process improvements
   - Highlight changes in `History` dialog
   - Scroll to latest revision in `History` tab automatically
@@ -53,7 +55,11 @@ $ npm run watch:firefox
 
 # Demo
 
-![Highlight changes demo](docs/highlight.gif)
-&nbsp;
-![Scroll to latest change](docs/scroll.gif)
-&nbsp;
+- Copy test case number, name, and link to share by a single click
+  ![Copy & Share](docs/copy.gif)
+  &nbsp;
+- Highlight changes in `History` dialog
+  ![Highlight changes demo](docs/highlight.gif)
+  &nbsp;
+- Scroll to latest revision in `History` tab automatically
+  ![Scroll to latest change](docs/scroll.gif)
