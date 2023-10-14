@@ -27,18 +27,6 @@ const onDomChangeCallback = (mutations, observer) => {
         });
       });
     }
-    if (mutation.type === 'attributes') {
-      subscribers.filter(subscriber => subscriber.trigger.mutationType === 'attributes').forEach(subscriber => {
-        const trigger = subscriber.trigger;
-
-        const isTagNameMatched = !trigger.tagName || trigger.tagName === node.localName;
-        const isIdMatched = !trigger.id || trigger.id === node.id;
-
-        if (isTagNameMatched && isIdMatched) {
-          subscriber.exec(node.baseURI);
-        }
-      });
-    }
   }
 }
 
