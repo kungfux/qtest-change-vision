@@ -1,31 +1,44 @@
-import { exec as dialogExec } from '../qtest/dialog.js';
-import { trigger as historyDialogTrigger, exec as historyDialogExec } from '../qtest/tab/test-design/history.dialog.js';
-import { trigger as testCasePageTrigger, exec as testCasePageExec } from '../qtest/tab/test-design/test-case.view.js';
+import { exec as dismissDialogExec } from '../qtest/dismiss-dialog.js';
+import { trigger as highlightHistoryTrigger, exec as highlightHistoryExec } from '../qtest/tab/test-design/highlight-history.js';
+import { trigger as scrollHistoryTrigger, exec as scrollHistoryExec } from '../qtest/tab/test-design/scroll-history.js';
+import { trigger as copyNumberTrigger, exec as copyNumberExec } from '../qtest/tab/test-design/copy-number.js';
 
 const subscribers = [];
 
 const onDomChangeCallback = (mutations, observer) => {
   for (const mutation of mutations) {
-    const addedNodes = mutation.addedNodes;
+    if (mutation.type === 'childList') {
+      const addedNodes = mutation.addedNodes;
 
-    if (!addedNodes.length) {
-      return;
+      if (!addedNodes.length) {
+        return;
+      }
+
+      addedNodes.forEach(node => {
+        subscribers.filter(subscriber => subscriber.trigger.mutationType === 'childList').forEach(subscriber => {
+          const trigger = subscriber.trigger;
+
+          const isTagNameMatched = !trigger.tagName || trigger.tagName === node.localName;
+          const isIdMatched = !trigger.id || trigger.id === node.id;
+
+          if (isTagNameMatched && isIdMatched) {
+            subscriber.exec(node.baseURI);
+          }
+        });
+      });
     }
-
-    addedNodes.forEach(node => {
-      subscribers.forEach(subscriber => {
+    if (mutation.type === 'attributes') {
+      subscribers.filter(subscriber => subscriber.trigger.mutationType === 'attributes').forEach(subscriber => {
         const trigger = subscriber.trigger;
 
-        const isMutationTypeMatched = !trigger.mutationType || trigger.mutationType === mutation.type;
         const isTagNameMatched = !trigger.tagName || trigger.tagName === node.localName;
         const isIdMatched = !trigger.id || trigger.id === node.id;
 
-        if (isMutationTypeMatched && isTagNameMatched && isIdMatched) {
+        if (isTagNameMatched && isIdMatched) {
           subscriber.exec(node.baseURI);
         }
       });
-    });
-
+    }
   }
 }
 
@@ -35,10 +48,11 @@ function main() {
   }
   window.hasRun = true;
 
-  subscribers.push({ trigger: historyDialogTrigger, exec: historyDialogExec });
-  subscribers.push({ trigger: testCasePageTrigger, exec: testCasePageExec });
+  subscribers.push({ trigger: highlightHistoryTrigger, exec: highlightHistoryExec });
+  subscribers.push({ trigger: scrollHistoryTrigger, exec: scrollHistoryExec });
+  subscribers.push({ trigger: copyNumberTrigger, exec: copyNumberExec });
 
-  dialogExec();
+  dismissDialogExec();
 
   const config = { childList: true, subtree: true };
   const observer = new MutationObserver(onDomChangeCallback);
