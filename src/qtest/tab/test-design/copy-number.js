@@ -49,7 +49,7 @@ async function exec(baseURI) {
       color: #fff;
       transition: background-color .1s;
     }
-    .qma-copy-dd:hover .qma-copy-content {
+    .qma-open-copy-content {
       display: block;
     }
     hr.qma-copy-hr {
@@ -59,8 +59,7 @@ async function exec(baseURI) {
       border: none;
       height: 1px;
       margin: 3px 0;
-    }
-    `);
+    }`);
   container.innerHTML = `
   <div id='qma-copy-section' class="qma-copy-dd">
     <button class="btn btn-default actionBtn">Copy & Share</button>
@@ -76,20 +75,35 @@ async function exec(baseURI) {
   </div>
   ` + container.innerHTML;
 
+  const copySection = getElementByXpath('//*[@id="qma-copy-section"]');
+  const copyContent = getElementByXpath('//*[@class="qma-copy-content"]');
+
+  copySection.addEventListener('mouseenter', () => {
+    copyContent.classList.add('qma-open-copy-content');
+  });
+  copySection.addEventListener('mouseleave', () => {
+    copyContent.classList.remove('qma-open-copy-content');
+  });
+
   getElementByXpath('//*[@id="qma-copy-link"]')?.addEventListener('click', () => {
     copyToClipboard(testCaseUrl);
+    copyContent.classList.remove('qma-open-copy-content');
   });
   getElementByXpath('//*[@id="qma-copy-number"]')?.addEventListener('click', () => {
     copyToClipboard(testCaseNumber);
+    copyContent.classList.remove('qma-open-copy-content');
   });
-  getElementByXpath('//*[@id="copy-number-and-link"]')?.addEventListener('click', () => {
+  getElementByXpath('//*[@id="qma-copy-number-and-link"]')?.addEventListener('click', () => {
     copyToClipboard(`${testCaseNumber} ${testCaseUrl}`);
+    copyContent.classList.remove('qma-open-copy-content');
   });
   getElementByXpath('//*[@id="qma-copy-number-and-name"]')?.addEventListener('click', () => {
     copyToClipboard(`${testCaseNumber} ${testCaseName}`);
+    copyContent.classList.remove('qma-open-copy-content');
   });
   getElementByXpath('//*[@id="qma-copy-markdown"]')?.addEventListener('click', () => {
     copyToClipboard(`[${testCaseNumber} ${testCaseName}](${testCaseUrl})`);
+    copyContent.classList.remove('qma-open-copy-content');
   });
 }
 
