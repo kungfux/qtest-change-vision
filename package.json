@@ -1,6 +1,6 @@
 {
   "name": "qtest-manager-assistant",
-  "version": "0.3",
+  "version": "0.3.1",
   "description": "Add extra functionality to qTest Manager",
   "private": true,
   "scripts": {
