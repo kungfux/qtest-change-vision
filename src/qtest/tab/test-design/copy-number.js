@@ -60,7 +60,7 @@ async function exec(baseURI) {
       height: 1px;
       margin: 3px 0;
     }`);
-  container.innerHTML = `
+  const copyContainer = `
   <div id='qma-copy-section' class="qma-copy-dd">
     <button class="btn btn-default actionBtn">Copy & Share</button>
       <div class="qma-copy-content">
@@ -73,7 +73,9 @@ async function exec(baseURI) {
         <a id="qma-copy-markdown" title="[${testCaseNumber} ${testCaseName}](${testCaseUrl})">Markdown</a>
       </div>
   </div>
-  ` + container.innerHTML;
+  `;
+
+  container.insertAdjacentHTML('afterbegin', copyContainer);
 
   const copySection = getElementByXpath('//*[@id="qma-copy-section"]');
   const copyContent = getElementByXpath('//*[@class="qma-copy-content"]');
